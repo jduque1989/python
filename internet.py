@@ -1,4 +1,8 @@
-# https://github.com/sivel/speedtest-cli
+#Internet speedtest usefull to check local speed network 
+# Use source code from https://github.com/sivel/speedtest-cli
+#Author script: Juan David Duque 
+#Date created 9 august 2020
+
 import speedtest as st
 import pandas as pd
 import numpy as np
@@ -63,6 +67,8 @@ plt.xlabel("iterations")
 plt.ylabel("Mb/s")
 plt.style.use('fivethirtyeight')
 
+#read csv file 
+
 def csv_read():
     data = pd.read_csv("internet_speeds_dataset.csv")
     ping = data.iloc[:,1]
@@ -71,6 +77,7 @@ def csv_read():
     plot_network(ping, download_data, upload_data)
     average(download_data, upload_data)
 
+#Plot iterations 
 def plot_network(ping, download_data, upload_data):
 
     plt.figure(1)
@@ -92,7 +99,7 @@ def plot_network(ping, download_data, upload_data):
     plt.show()
     plt.tight_layout()
 
- 
+#Loop to create multiple file  
     
 def animate():
     for count in range(input_times):
@@ -100,7 +107,9 @@ def animate():
         print("Iteration ", iteration)
         new_speeds = get_new_speeds()
         update_csv(new_speeds)
-        
+
+#Compute average of iteration
+
 def average(download_data, upload_data):
     average_download = round(sum(download_data) / len(download_data),2)
     average_upload = round(sum(upload_data) / len(upload_data),2)
@@ -110,5 +119,5 @@ def average(download_data, upload_data):
 animate()
 csv_read()
 
-
+#remove file to avoid trash 
 os.remove('internet_speeds_dataset.csv')

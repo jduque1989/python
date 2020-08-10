@@ -65,7 +65,7 @@ def update_csv(internet_speeds):
 plt.title("Network speed")
 plt.xlabel("iterations")
 plt.ylabel("Mb/s")
-plt.style.use('fivethirtyeight')
+plt.style.use(['fivethirtyeight'])
 
 #read csv file 
 
@@ -73,9 +73,10 @@ def csv_read():
     data = pd.read_csv("internet_speeds_dataset.csv")
     ping = data.iloc[:,1]
     download_data =  data.iloc[:,2]
-    upload_data = data.iloc[:,3]  
+    upload_data = data.iloc[:,3]
+    average(download_data, upload_data)  
     plot_network(ping, download_data, upload_data)
-    average(download_data, upload_data)
+    
 
 #Plot iterations 
 def plot_network(ping, download_data, upload_data):
@@ -84,15 +85,15 @@ def plot_network(ping, download_data, upload_data):
 
     plt.subplot(3,1,1)
     plt.title("Network Speed")
-    plt.plot(download_data,'r-')
+    plt.plot(download_data,'-ro')
     plt.legend(["Download"],loc = 'right')
        
     plt.subplot(3,1,2)
-    plt.plot(upload_data,'b-')
+    plt.plot(upload_data,'-bo')
     plt.legend(["Upload"],loc = 'right')
   
     plt.subplot(3,1,3)
-    plt.plot(ping,'k-')
+    plt.plot(ping,'-ko')
     plt.legend(["Ping"])
     plt.xlabel('Iterations',loc = 'right')
         
